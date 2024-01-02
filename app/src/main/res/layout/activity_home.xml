@@ -24,6 +24,12 @@
                 android:layout_height="wrap_content" />
 
             <include
+                android:id="@+id/componentMenuHome"
+                layout="@layout/component_menu_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include
                 android:id="@+id/componentHomeEwallet"
                 layout="@layout/component_home_ewallet"
                 android:layout_width="match_parent"

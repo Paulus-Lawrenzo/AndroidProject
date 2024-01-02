@@ -16,6 +16,7 @@
         tools:listitem="@layout/item_saving_deposit"/>
 
     <LinearLayout
+        android:id="@+id/llShowMore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -35,7 +36,28 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_drop_down"
             />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llShowLess"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rvSavingDeposit">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_drop_up"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tutup"
 
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

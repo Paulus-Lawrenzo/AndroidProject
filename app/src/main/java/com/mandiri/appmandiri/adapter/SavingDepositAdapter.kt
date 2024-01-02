@@ -9,6 +9,7 @@ import com.mandiri.appmandiri.model.SavingDepositModel
 class SavingDepositAdapter(
     private val savingDepositData: MutableList<SavingDepositModel>
 ) : RecyclerView.Adapter<SavingDepositAdapter.SavingDepositViewHolder>() {
+    private var maximumItems = 2
     inner class SavingDepositViewHolder(private val itemBinding: ItemSavingDepositBinding):
         RecyclerView.ViewHolder(itemBinding.root){
         fun bind(data: SavingDepositModel){
@@ -28,11 +29,13 @@ class SavingDepositAdapter(
         )
     }
 
-    override fun getItemCount(): Int = if (savingDepositData.size>=5) MAX_ITEM else savingDepositData.size
+    override fun getItemCount(): Int = if (savingDepositData.size>=5) maximumItems else savingDepositData.size
     override fun onBindViewHolder(holder: SavingDepositViewHolder, position: Int) {
         holder.bind(savingDepositData[position])
     }
-    companion object{
-        const val MAX_ITEM=2
+
+    fun updateQuantityDepositSize(sizeUpdated: Int){
+        maximumItems= sizeUpdated
+        notifyDataSetChanged()
     }
 }

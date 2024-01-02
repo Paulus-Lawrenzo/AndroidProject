@@ -1,22 +1,29 @@
 package com.mandiri.appmandiri
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.mandiri.appmandiri.adapter.EwalletAdapter
+import com.mandiri.appmandiri.adapter.MenuHomeAdapter
 import com.mandiri.appmandiri.adapter.SavingDepositAdapter
 import com.mandiri.appmandiri.databinding.ActivityHomeBinding
 import com.mandiri.appmandiri.model.EwalletModel
+import com.mandiri.appmandiri.model.MenuModel
 import com.mandiri.appmandiri.model.SavingDepositModel
 
 class HomeActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var savingDepositAdapter: SavingDepositAdapter
+    private lateinit var menuAdapter: MenuHomeAdapter
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
     }
@@ -40,12 +47,27 @@ class HomeActivity: AppCompatActivity() {
             EwalletModel(name = "LinkAja", image = R.drawable.ic_linkaja, balance = 100000.0, isConnected = false),
             EwalletModel(name = "Ovo", image = R.drawable.ic_ovo, balance = 100000.0, isConnected = false),
             EwalletModel(name = "Dana", image = R.drawable.ic_dana, balance = 100000.0, isConnected = false),
-            EwalletModel(name = "Ovo", image = R.drawable.ic_barcode, balance = 100000.0, isConnected = false)
+            EwalletModel(name = "AstraPay", image = R.drawable.ic_barcode, balance = 100000.0, isConnected = false)
         )
     }
 
     private fun setUpViewSavingDeposit(){
-        binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = SavingDepositAdapter(populateSavingDepositData())
+        savingDepositAdapter = SavingDepositAdapter(populateSavingDepositData())
+        binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = savingDepositAdapter
+        updateSizeSavingDeposit(populateSavingDepositData())
+    }
+    private fun updateSizeSavingDeposit(data: MutableList<SavingDepositModel>){
+        binding.componentHomeSavingDeposit.llShowMore.isVisible = data.size > 2
+        binding.componentHomeSavingDeposit.llShowMore.setOnClickListener{
+            savingDepositAdapter.updateQuantityDepositSize(data.size)
+            binding.componentHomeSavingDeposit.llShowMore.visibility = View.GONE
+            binding.componentHomeSavingDeposit.llShowLess.visibility = View.VISIBLE
+        }
+        binding.componentHomeSavingDeposit.llShowLess.setOnClickListener{
+            savingDepositAdapter.updateQuantityDepositSize(2)
+            binding.componentHomeSavingDeposit.llShowMore.visibility = View.VISIBLE
+            binding.componentHomeSavingDeposit.llShowLess.visibility = View.GONE
+        }
     }
     private fun populateSavingDepositData(): MutableList<SavingDepositModel>{
         return mutableListOf(
@@ -75,5 +97,54 @@ class HomeActivity: AppCompatActivity() {
                 imageCard = R.drawable.ic_card_rek
             ),
         )
+    }
+
+    private fun populateDataMenuHome(): List<MenuModel>{
+        return listOf(
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Transfer"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Donasi"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "QR"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Zakat"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Cashsles"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "E-Wallet"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Tarik"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Bayar"
+            ),
+            MenuModel(
+                image = R.drawable.ic_circle,
+                menuTitle = "Setor"
+            )
+        )
+    }
+    private fun setUpViewMenu(){
+        menuAdapter = MenuHomeAdapter(populateDataMenuHome())
+        binding.componentMenuHome.gridHome.adapter = menuAdapter
+
+        menuAdapter.setOnClickMenu {
+            Toast.makeText(this, "${it.menuTitle}", Toast.LENGTH_SHORT).show()
+        }
     }
 }
