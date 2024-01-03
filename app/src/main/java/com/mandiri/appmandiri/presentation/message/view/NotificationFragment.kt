@@ -12,6 +12,7 @@ import com.mandiri.appmandiri.model.NotificationModel
 class NotificationFragment : Fragment() {
     private var _binding: FragmentNotificationBinding? = null
     private val  binding get() = _binding!!
+    private var notificationAdapter = NotificationAdapter(populateNotification())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,7 +30,7 @@ class NotificationFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.rvNotification.adapter = NotificationAdapter(populateNotification())
+        binding.rvNotification.adapter = notificationAdapter
     }
 
     private fun populateNotification(): List<NotificationModel> {
