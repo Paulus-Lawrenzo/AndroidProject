@@ -37,6 +37,7 @@ class MenuHomeAdapter(
     inner class MenuViewHolder(val binding: ItemMenuHomeBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(data: MenuModel, onClickMenu: (MenuModel) -> Unit){
             binding.tvTitleMenu.text = data.menuTitle
+            binding.ivMenuHome.setImageResource(data.image)
             binding.constraintItemHome.setOnClickListener{
                 onClickMenu.invoke(data)
             }

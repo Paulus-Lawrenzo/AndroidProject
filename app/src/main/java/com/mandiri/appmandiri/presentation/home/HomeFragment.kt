@@ -1,53 +1,56 @@
-package com.mandiri.appmandiri
+package com.mandiri.appmandiri.presentation.home
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.EwalletAdapter
 import com.mandiri.appmandiri.adapter.MenuHomeAdapter
 import com.mandiri.appmandiri.adapter.SavingDepositAdapter
-import com.mandiri.appmandiri.databinding.ActivityHomeBinding
-import com.mandiri.appmandiri.helper.SharedPref
+import com.mandiri.appmandiri.databinding.FragmentHomeBinding
 import com.mandiri.appmandiri.model.EwalletModel
 import com.mandiri.appmandiri.model.MenuModel
 import com.mandiri.appmandiri.model.SavingDepositModel
 
-class HomeActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityHomeBinding
+class HomeFragment : Fragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private lateinit var savingDepositAdapter: SavingDepositAdapter
     private lateinit var menuAdapter: MenuHomeAdapter
-    private lateinit var sharedPref: SharedPref
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        sharedPref = SharedPref(this)
-        setContentView(binding.root)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
-        setupLogout()
     }
 
-    private fun setupLogout() {
-        binding.btnLogut.setOnClickListener {
-            sharedPref.clearDataPref()
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun setUpViewWallet(){
         dummyEwalletList = createDummyEwalletList()
-
         binding.componentHomeEwallet.rvEwallet.adapter = ewalletAdapter
         ewalletAdapter.setDataEwallet(dummyEwalletList ?: mutableListOf())
         ewalletAdapter.setOnClickEwallet {Ewallet ->
-            Toast.makeText(this, "Berhasil menghubungkan ${Ewallet.name}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "Berhasil menghubungkan ${Ewallet.name}", Toast.LENGTH_SHORT).show()
             dummyEwalletList?.forEach{
                 if (it.name == Ewallet.name) it.isConnected=true
             }
@@ -158,7 +161,7 @@ class HomeActivity: AppCompatActivity() {
         binding.componentMenuHome.gridHome.adapter = menuAdapter
 
         menuAdapter.setOnClickMenu {
-            Toast.makeText(this, "${it.menuTitle}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity, "${it.menuTitle}", Toast.LENGTH_SHORT).show()
         }
     }
 }

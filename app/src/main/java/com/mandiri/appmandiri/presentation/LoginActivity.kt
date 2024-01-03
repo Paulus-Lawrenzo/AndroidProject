@@ -1,4 +1,4 @@
-package com.mandiri.appmandiri
+package com.mandiri.appmandiri.presentation
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,24 +6,24 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import com.mandiri.appmandiri.databinding.ActivityMainBinding
+import com.mandiri.appmandiri.databinding.ActivityLoginBinding
 import com.mandiri.appmandiri.helper.SharedPref
 import java.util.UUID
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class LoginActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var sharedPref: SharedPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         sharedPref = SharedPref(this)
         setContentView(binding.root)
 
         handleLogin()
 
         if (checkAvailableToken()){
-            handleTo(HomeActivity::class.java)
+            handleTo(HomeMainActivity::class.java)
         }
     }
 
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     showToast("Berhasil")
 //                Toast.makeText(applicationContext, "Berhasil", Toast.LENGTH_SHORT).show()
                     handleVisibility(tvErrorPassword, false)
-                    handleTo(HomeActivity::class.java)
+                    handleTo(HomeMainActivity::class.java)
 
                     //shared preferences
                     val dummyToken = UUID.randomUUID().toString()

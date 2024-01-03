@@ -34,7 +34,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_drop_down"
+            android:src="@drawable/ic_addres"
             />
     </LinearLayout>
     <LinearLayout
@@ -51,7 +51,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_drop_up"
+            android:src="@drawable/ic_addres"
             />
         <TextView
             android:layout_width="wrap_content"

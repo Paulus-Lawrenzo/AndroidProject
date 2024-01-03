@@ -35,7 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tvSelamat"
         app:layout_constraintTop_toTopOf="@id/tvSelamat"
-        android:text="Rens Junior Sibarani dfsfdsfdsfsdfsdfsd"
+        android:text="Paulus Lawrenzo Tambunan"
         android:ellipsize="end"
         android:maxLines="1"
         android:textAlignment="center"
