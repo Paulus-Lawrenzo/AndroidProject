@@ -1,5 +1,6 @@
 package com.mandiri.appmandiri
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -9,6 +10,7 @@ import com.mandiri.appmandiri.adapter.EwalletAdapter
 import com.mandiri.appmandiri.adapter.MenuHomeAdapter
 import com.mandiri.appmandiri.adapter.SavingDepositAdapter
 import com.mandiri.appmandiri.databinding.ActivityHomeBinding
+import com.mandiri.appmandiri.helper.SharedPref
 import com.mandiri.appmandiri.model.EwalletModel
 import com.mandiri.appmandiri.model.MenuModel
 import com.mandiri.appmandiri.model.SavingDepositModel
@@ -17,16 +19,28 @@ class HomeActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     private lateinit var savingDepositAdapter: SavingDepositAdapter
     private lateinit var menuAdapter: MenuHomeAdapter
+    private lateinit var sharedPref: SharedPref
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
+        sharedPref = SharedPref(this)
         setContentView(binding.root)
         setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
+        setupLogout()
     }
+
+    private fun setupLogout() {
+        binding.btnLogut.setOnClickListener {
+            sharedPref.clearDataPref()
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
+    }
+
     private fun setUpViewWallet(){
         dummyEwalletList = createDummyEwalletList()
 
