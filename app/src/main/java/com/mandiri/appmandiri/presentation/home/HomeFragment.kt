@@ -86,6 +86,8 @@ class HomeFragment : Fragment() {
             binding.componentHomeSavingDeposit.llShowLess.visibility = View.GONE
         }
     }
+
+    // move to viewModel
     private fun populateSavingDepositData(): MutableList<SavingDepositModel>{
         return mutableListOf(
             SavingDepositModel(
@@ -116,6 +118,8 @@ class HomeFragment : Fragment() {
         )
     }
 
+
+    // move to viewModel
     private fun populateDataMenuHome(): List<MenuModel>{
         return listOf(
             MenuModel(
