@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/llAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/tvAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Akun"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="#833C3535"/>
+
+
+        <LinearLayout
+            android:id="@+id/llNamaPanggilan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:src="@drawable/baseline_arrow_right_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/tvNamaPanggilan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Panggilan"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey"/>
+
+        <LinearLayout
+            android:id="@+id/llEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:src="@drawable/baseline_arrow_right_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey"/>
+
+        <LinearLayout
+            android:id="@+id/llBahasa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:src="@drawable/baseline_arrow_right_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/tvBahasa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bahasa"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/grey"/>
+
+        <LinearLayout
+            android:id="@+id/llPengkinianData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+
+            <ImageView
+                android:src="@drawable/baseline_arrow_right_24"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+            <TextView
+                android:id="@+id/tvPengkinianData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pengkinian Data"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
