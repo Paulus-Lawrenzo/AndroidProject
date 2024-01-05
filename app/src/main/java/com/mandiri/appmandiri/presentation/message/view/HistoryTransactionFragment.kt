@@ -25,16 +25,14 @@ class HistoryTransactionFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateToDetailHistory() {
-        val intent = Intent(context, DetailTransactionActivity::class.java)
-        startActivity(intent)
-    }
-
     private fun setupViewHistoryTransaction() {
         binding.rvTransaction.adapter = HistoryTransactionAdapter(
             data = populateDataHistoryTransaction(),
             onClickHistoryTransaction = {
-                navigateToDetailHistory()
+                DetailTransactionActivity.navigateToDetailTransaction(
+                    activity = requireActivity(),
+                    data = it
+                )
             }
         )
     }

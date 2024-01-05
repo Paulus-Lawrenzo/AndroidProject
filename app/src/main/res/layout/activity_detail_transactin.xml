@@ -1,9 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <include
         android:id="@+id/componentToolbar"
-        layout="@layout/component_toolbar"/>
+        layout="@layout/component_toolbar" />
+
+    <TextView
+        android:id="@+id/tvTitleTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/componentToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Title Transaction"/>
+
+    <TextView
+        android:id="@+id/tvDetailTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTransaction"
+        tools:text="Transaksi Berhasil"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tvDateTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailTransaction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Date Transaction"/>
+
+    <TextView
+        android:id="@+id/tvSubtitleTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvDateTransaction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Sub Title Transaction"/>
+
+    <TextView
+        android:id="@+id/tvsumBalance"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitleTransaction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvBalanceTransaction"
+        android:text="Total Transaksi"
+        android:textStyle="bold"/>
+    <TextView
+        android:id="@+id/tvBalanceTransaction"
+        android:textAlignment="textEnd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginVertical="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitleTransaction"
+        app:layout_constraintStart_toEndOf="@id/tvsumBalance"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Balance Transaction"
+        android:textStyle="bold"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
