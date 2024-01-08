@@ -1,7 +1,9 @@
 package com.mandiri.appmandiri.presentation
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -10,10 +12,12 @@ import com.mandiri.appmandiri.databinding.HomeMainActivityBinding
 import com.mandiri.appmandiri.helper.SharedPref
 import com.mandiri.appmandiri.presentation.home.HomeFragment
 import com.mandiri.appmandiri.presentation.message.MessageFragment
+import com.mandiri.appmandiri.utils.ConfirmationDialogUtil
 
 class HomeMainActivity : AppCompatActivity() {
     private lateinit var binding: HomeMainActivityBinding
     private lateinit var sharedPref: SharedPref
+    private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
 
     private val onNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
@@ -39,7 +43,7 @@ class HomeMainActivity : AppCompatActivity() {
                 }
 
                 R.id.navigationLogout -> {
-                    logout()
+                    showConfirmation()
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -50,12 +54,46 @@ class HomeMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = HomeMainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        sharedPref = SharedPref(this)
+        confirmationDialogUtil = ConfirmationDialogUtil(this)
+
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
 
         if (savedInstanceState == null) {
             binding.bottomNavigation.selectedItemId = R.id.navigationHome
         }
+    }
+
+    private fun showConfirmation() {
+        val title = "Konfirmasi"
+        val icon = R.drawable.baseline_account_circle_24
+
+        confirmationDialogUtil.showConfirmationDialog(
+            title,
+            icon,
+            onConfirm = {
+                logout()
+            },
+            onCancel = {
+
+            }
+        )
+    }
+
+    private fun showDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder
+            .setTitle("Apakah anda yakin")
+            .setMessage("Ingin keluar dari livin?")
+            .setPositiveButton("Ya") { _: DialogInterface, _: Int ->
+                logout()
+            }.setNegativeButton("Tidak") { _: DialogInterface, _: Int ->
+
+            }
+
+        val dialog = builder.create()
+        dialog.show()
     }
 
     private fun logout() {

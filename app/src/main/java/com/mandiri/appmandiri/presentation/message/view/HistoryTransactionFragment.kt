@@ -13,12 +13,14 @@ import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.HistoryTransactionAdapter
 import com.mandiri.appmandiri.databinding.FragmentHistoryTransactionBinding
 import com.mandiri.appmandiri.model.HistoryTransactionModel
+import com.mandiri.appmandiri.utils.ConfirmationDialogUtil
 
 class HistoryTransactionFragment : Fragment() {
     private var _binding: FragmentHistoryTransactionBinding? = null
     private val binding get() = _binding!!
     private var _historyAdapter: HistoryTransactionAdapter? = null
     private var _historyTransactionData: List<HistoryTransactionModel>? = null
+    private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +34,7 @@ class HistoryTransactionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        confirmationDialogUtil = ConfirmationDialogUtil(requireContext())
 
         setupViewHistoryTransaction()
 
@@ -72,11 +75,19 @@ class HistoryTransactionFragment : Fragment() {
         _historyTransactionData = populateDataHistoryTransaction()
         _historyAdapter = HistoryTransactionAdapter(
             data = populateDataHistoryTransaction(),
-            onClickHistoryTransaction = {
-                DetailTransactionActivity.navigateToDetailTransaction(
-                    activity = requireActivity(),
-                    data = it
-                )
+            onClickHistoryTransaction = {dataTransaction ->
+                confirmationDialogUtil.showConfirmationDialog(
+                    title = dataTransaction.titleTransaction,
+                    icon = dataTransaction.iconTransaction,
+                    onConfirm = {
+                        DetailTransactionActivity.navigateToDetailTransaction(
+                            activity = requireActivity(),
+                            dataTransaction
+                        )
+                    },
+                    onCancel = {
+
+                    })
             }
         )
         binding.rvTransaction.adapter = _historyAdapter
