@@ -9,14 +9,18 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.databinding.HomeMainActivityBinding
-import com.mandiri.appmandiri.helper.SharedPref
+import com.mandiri.appmandiri.helper.SharedPrefHelper
 import com.mandiri.appmandiri.presentation.home.HomeFragment
 import com.mandiri.appmandiri.presentation.message.MessageFragment
 import com.mandiri.appmandiri.utils.ConfirmationDialogUtil
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HomeMainActivity : AppCompatActivity() {
     private lateinit var binding: HomeMainActivityBinding
-    private lateinit var sharedPref: SharedPref
+    @Inject
+    lateinit var sharedPrefHelper: SharedPrefHelper
     private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
 
     private val onNavigationItemSelectedListener =
@@ -59,7 +63,6 @@ class HomeMainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = HomeMainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        sharedPref = SharedPref(this)
         confirmationDialogUtil = ConfirmationDialogUtil(this)
 
 
@@ -102,7 +105,7 @@ class HomeMainActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        sharedPref.clearDataPref()
+        sharedPrefHelper.clearDataPref()
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
     }
