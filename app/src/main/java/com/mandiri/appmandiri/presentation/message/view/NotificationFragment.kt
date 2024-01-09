@@ -5,14 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mandiri.appmandiri.adapter.NotificationAdapter
 import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentNotificationBinding
 import com.mandiri.appmandiri.model.NotificationModel
+import com.mandiri.appmandiri.presentation.viewmodel.NotificationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
 
-    private var notificationAdapter = NotificationAdapter(populateNotification())
+    private val viewModel: NotificationViewModel by viewModels()
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -21,7 +25,18 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
     }
 
     override fun setupView() {
-        binding.rvNotification.adapter = notificationAdapter
+        viewModel.setNotificationData(populateNotification())
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.notificationData.observe(viewLifecycleOwner) {
+            setNotificationData(it)
+        }
+    }
+
+    private fun setNotificationData(data: List<NotificationModel>) {
+        binding.rvNotification.adapter = NotificationAdapter(data)
     }
 
     private fun populateNotification(): List<NotificationModel> {

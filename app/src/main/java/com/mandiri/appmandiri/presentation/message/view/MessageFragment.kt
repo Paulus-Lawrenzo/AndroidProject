@@ -1,4 +1,4 @@
-package com.mandiri.appmandiri.presentation.message
+package com.mandiri.appmandiri.presentation.message.view
 
 import android.os.Bundle
 import android.os.Message
