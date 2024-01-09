@@ -5,6 +5,10 @@
         android:id="@+id/navigationHome"
         android:title="Beranda"
         android:icon="@drawable/ic_barcode"/>
+<!--    <item-->
+<!--        android:id="@+id/navigationProfile"-->
+<!--        android:title="Profile"-->
+<!--        android:icon="@drawable/ic_circle"/>-->
     <item
         android:id="@+id/navigationPromo"
         android:title="Promo"

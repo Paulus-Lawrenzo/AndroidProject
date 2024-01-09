@@ -1,13 +1,11 @@
 package com.mandiri.appmandiri.presentation.message.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.HistoryTransactionAdapter
@@ -78,6 +76,7 @@ class HistoryTransactionFragment : Fragment() {
             onClickHistoryTransaction = {dataTransaction ->
                 confirmationDialogUtil.showConfirmationDialog(
                     title = dataTransaction.titleTransaction,
+                    isOnHistoryTransaction = false,
                     icon = dataTransaction.iconTransaction,
                     onConfirm = {
                         DetailTransactionActivity.navigateToDetailTransaction(

@@ -27,8 +27,13 @@ class HomeMainActivity : AppCompatActivity() {
                     return@OnNavigationItemSelectedListener true
                 }
 
+//                R.id.navigationProfile -> {
+//                    replaceFragment(ProfileFragment())
+//                    return@OnNavigationItemSelectedListener true
+//                }
+
                 R.id.navigationPromo -> {
-                    replaceFragment(PromoFragment())
+                    replaceFragment(ProfileFragment())
                     return@OnNavigationItemSelectedListener true
                 }
 
@@ -66,12 +71,12 @@ class HomeMainActivity : AppCompatActivity() {
     }
 
     private fun showConfirmation() {
-        val title = "Konfirmasi"
         val icon = R.drawable.baseline_account_circle_24
 
         confirmationDialogUtil.showConfirmationDialog(
-            title,
-            icon,
+            title = "Log Out",
+            isOnHistoryTransaction = false,
+            icon = icon,
             onConfirm = {
                 logout()
             },

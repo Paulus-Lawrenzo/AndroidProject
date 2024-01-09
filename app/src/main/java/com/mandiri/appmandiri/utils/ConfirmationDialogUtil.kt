@@ -13,7 +13,8 @@ class ConfirmationDialogUtil(private val context: Context) {
         title: String,
         icon: Int,
         onConfirm: () -> Unit,
-        onCancel: () -> Unit
+        onCancel: () -> Unit,
+        isOnHistoryTransaction: Boolean
     ) {
         val dialogBuilder = AlertDialog.Builder(context)
         val alertDialog = dialogBuilder.create()
