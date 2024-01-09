@@ -6,30 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.mandiri.appmandiri.adapter.NotificationAdapter
+import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentNotificationBinding
 import com.mandiri.appmandiri.model.NotificationModel
 
-class NotificationFragment : Fragment() {
-    private var _binding: FragmentNotificationBinding? = null
-    private val  binding get() = _binding!!
+class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
+
     private var notificationAdapter = NotificationAdapter(populateNotification())
-
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentNotificationBinding {
+        return FragmentNotificationBinding.inflate(inflater, container, false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         binding.rvNotification.adapter = notificationAdapter
     }
 

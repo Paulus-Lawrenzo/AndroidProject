@@ -7,37 +7,24 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.mandiri.appmandiri.R
+import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentProfileBinding
 import com.mandiri.appmandiri.databinding.ActivityProfilBinding
 
-class ProfileFragment : Fragment() {
-    private var _binding: ActivityProfilBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+class ProfileFragment : BaseFragment<ActivityProfilBinding>() {
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = ActivityProfilBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): ActivityProfilBinding {
+        return ActivityProfilBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setupView() {
         val imageUrl = "https://dafunda.com/wp-content/uploads/2021/09/AOT.jpg"
         Glide.with(this)
             .load(imageUrl)
             .placeholder(R.drawable.baseline_account_circle_24)
             .error(R.drawable.baseline_copyright_24)
             .into(binding.ivProfileImage)
-    }
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

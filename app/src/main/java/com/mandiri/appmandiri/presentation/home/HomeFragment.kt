@@ -11,38 +11,29 @@ import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.EwalletAdapter
 import com.mandiri.appmandiri.adapter.MenuHomeAdapter
 import com.mandiri.appmandiri.adapter.SavingDepositAdapter
+import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentHomeBinding
 import com.mandiri.appmandiri.model.EwalletModel
 import com.mandiri.appmandiri.model.MenuModel
 import com.mandiri.appmandiri.model.SavingDepositModel
 
-class HomeFragment : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
+
     private lateinit var savingDepositAdapter: SavingDepositAdapter
     private lateinit var menuAdapter: MenuHomeAdapter
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
-
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentHomeBinding {
+        return FragmentHomeBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setUpViewWallet(){

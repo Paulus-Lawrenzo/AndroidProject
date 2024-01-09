@@ -9,29 +9,24 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.HistoryTransactionAdapter
+import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentHistoryTransactionBinding
 import com.mandiri.appmandiri.model.HistoryTransactionModel
 import com.mandiri.appmandiri.utils.ConfirmationDialogUtil
 
-class HistoryTransactionFragment : Fragment() {
-    private var _binding: FragmentHistoryTransactionBinding? = null
-    private val binding get() = _binding!!
+class HistoryTransactionFragment : BaseFragment<FragmentHistoryTransactionBinding>() {
+
     private var _historyAdapter: HistoryTransactionAdapter? = null
     private var _historyTransactionData: List<HistoryTransactionModel>? = null
     private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
-
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHistoryTransactionBinding.inflate(inflater, container, false)
-        setupViewHistoryTransaction()
-        return binding.root
+        container: ViewGroup?
+    ): FragmentHistoryTransactionBinding {
+        return FragmentHistoryTransactionBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         confirmationDialogUtil = ConfirmationDialogUtil(requireContext())
 
         setupViewHistoryTransaction()
@@ -159,10 +154,5 @@ class HistoryTransactionFragment : Fragment() {
                 iconTransaction = R.drawable.baseline_copyright_24
             ),
         )
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

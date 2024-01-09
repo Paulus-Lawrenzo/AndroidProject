@@ -9,27 +9,23 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mandiri.appmandiri.adapter.MessageTabAdapter
+import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentMessageBinding
 import com.mandiri.appmandiri.presentation.message.view.HistoryTransactionFragment
 import com.mandiri.appmandiri.presentation.message.view.NotificationFragment
 
-class MessageFragment : Fragment() {
-    private var _binding: FragmentMessageBinding? = null
-    private val binding get() = _binding!!
+class MessageFragment : BaseFragment<FragmentMessageBinding>() {
+
     private var _testBool = false
     private var adapterMessage : MessageTabAdapter? = null
-
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentMessageBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentMessageBinding {
+        return FragmentMessageBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         setupTabView()
     }
 
@@ -51,10 +47,5 @@ class MessageFragment : Fragment() {
                 }
             }
         }.attach()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

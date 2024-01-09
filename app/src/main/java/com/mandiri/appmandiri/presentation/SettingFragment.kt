@@ -5,27 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentSettingBinding
 
-class SettingFragment : Fragment() {
-    private var _binding: FragmentSettingBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
+class SettingFragment : BaseFragment<FragmentSettingBinding>() {
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentSettingBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentSettingBinding {
+        return FragmentSettingBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
+    override fun setupView() {
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
