@@ -7,13 +7,16 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.HistoryTransactionAdapter
 import com.mandiri.appmandiri.base.BaseFragment
 import com.mandiri.appmandiri.databinding.FragmentHistoryTransactionBinding
 import com.mandiri.appmandiri.model.HistoryTransactionModel
 import com.mandiri.appmandiri.utils.ConfirmationDialogUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryTransactionFragment : BaseFragment<FragmentHistoryTransactionBinding>() {
 
     private var _historyAdapter: HistoryTransactionAdapter? = null

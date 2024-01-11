@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.EwalletAdapter
@@ -18,7 +17,6 @@ import com.mandiri.appmandiri.model.EwalletModel
 import com.mandiri.appmandiri.model.MenuModel
 import com.mandiri.appmandiri.model.SavingDepositModel
 import com.mandiri.appmandiri.presentation.home.viewmodel.HomeViewModel
-import com.mandiri.appmandiri.presentation.viewmodel.NotificationViewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -35,8 +33,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setupView() {
-        setUpViewWallet()
-        setUpViewSavingDeposit()
+        viewModel.setMenuData()
+        viewModel.setEwalletData()
+        viewModel.setSavingDepositData()
         observeViewModel()
     }
 
@@ -45,15 +44,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             setUpViewMenu(it)
         }
         viewModel.ewalletData.observe(viewLifecycleOwner) {
-            setUpViewWallet()
+            setUpViewWallet(it)
         }
         viewModel.savingDepositData.observe(viewLifecycleOwner) {
-            setUpViewSavingDeposit()
+            setUpViewSavingDeposit(it)
         }
     }
 
-    private fun setUpViewWallet(){
-        dummyEwalletList = createDummyEwalletList()
+    private fun setUpViewWallet(data: MutableList<EwalletModel>){
+        dummyEwalletList = data
         binding.componentHomeEwallet.rvEwallet.adapter = ewalletAdapter
         ewalletAdapter.setDataEwallet(dummyEwalletList ?: mutableListOf())
         ewalletAdapter.setOnClickEwallet {Ewallet ->
@@ -64,22 +63,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             ewalletAdapter.setDataEwallet(dummyEwalletList?.toMutableList() ?: mutableListOf())
         }
     }
-    private fun createDummyEwalletList(): MutableList<EwalletModel>{
-        return mutableListOf(
-            EwalletModel(name = "Gopay", image = R.drawable.ic_gopay, balance = 100000.0, isConnected = true),
-            EwalletModel(name = "Shopee", image = R.drawable.ic_barcode, balance = 100000.0, isConnected = false),
-            EwalletModel(name = "LinkAja", image = R.drawable.ic_linkaja, balance = 100000.0, isConnected = false),
-            EwalletModel(name = "Ovo", image = R.drawable.ic_ovo, balance = 100000.0, isConnected = false),
-            EwalletModel(name = "Dana", image = R.drawable.ic_dana, balance = 100000.0, isConnected = false),
-            EwalletModel(name = "AstraPay", image = R.drawable.ic_barcode, balance = 100000.0, isConnected = false)
-        )
+
+    private fun setUpViewSavingDeposit(data: MutableList<SavingDepositModel>){
+        savingDepositAdapter = SavingDepositAdapter(data)
+        binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = savingDepositAdapter
+        updateSizeSavingDeposit(data)
     }
 
-    private fun setUpViewSavingDeposit(){
-        savingDepositAdapter = SavingDepositAdapter(populateSavingDepositData())
-        binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = savingDepositAdapter
-        updateSizeSavingDeposit(populateSavingDepositData())
-    }
     private fun updateSizeSavingDeposit(data: MutableList<SavingDepositModel>){
         binding.componentHomeSavingDeposit.llShowMore.isVisible = data.size > 2
         binding.componentHomeSavingDeposit.llShowMore.setOnClickListener{
@@ -94,79 +84,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         }
     }
 
-    // move to viewModel
-    private fun populateSavingDepositData(): MutableList<SavingDepositModel>{
-        return mutableListOf(
-            SavingDepositModel(
-                savingName = "Tabungan IDR NOW",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Nikah",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Rumah",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Jajan",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Anak",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
-            ),
-        )
-    }
 
-
-    // move to viewModel
-    private fun populateDataMenuHome(): List<MenuModel>{
-        return listOf(
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Transfer"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Donasi"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "QR"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Zakat"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Cashsles"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "E-Wallet"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Tarik"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Bayar"
-            ),
-            MenuModel(
-                image = R.drawable.ic_circle,
-                menuTitle = "Setor"
-            )
-        )
-    }
     private fun setUpViewMenu(data: List<MenuModel>){
         menuAdapter = MenuHomeAdapter(data)
         binding.componentMenuHome.gridHome.adapter = menuAdapter
