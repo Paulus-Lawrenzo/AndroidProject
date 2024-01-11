@@ -25,7 +25,10 @@ class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
     }
 
     override fun setupView() {
-        viewModel.setNotificationData(populateNotification())
+        viewModel.setNotificationData()
+        binding.rvNotification.setOnClickListener {
+            viewModel.updateCustomData()
+        }
         observeViewModel()
     }
 

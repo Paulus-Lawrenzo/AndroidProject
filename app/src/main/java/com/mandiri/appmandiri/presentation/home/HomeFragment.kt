@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mandiri.appmandiri.R
 import com.mandiri.appmandiri.adapter.EwalletAdapter
 import com.mandiri.appmandiri.adapter.MenuHomeAdapter
@@ -16,9 +17,12 @@ import com.mandiri.appmandiri.databinding.FragmentHomeBinding
 import com.mandiri.appmandiri.model.EwalletModel
 import com.mandiri.appmandiri.model.MenuModel
 import com.mandiri.appmandiri.model.SavingDepositModel
+import com.mandiri.appmandiri.presentation.home.viewmodel.HomeViewModel
+import com.mandiri.appmandiri.presentation.viewmodel.NotificationViewModel
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
+    private val viewModel: HomeViewModel by viewModels()
     private lateinit var savingDepositAdapter: SavingDepositAdapter
     private lateinit var menuAdapter: MenuHomeAdapter
     private var ewalletAdapter = EwalletAdapter()
@@ -31,9 +35,21 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     override fun setupView() {
-        setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.homeMenu.observe(viewLifecycleOwner) {
+            setUpViewMenu(it)
+        }
+        viewModel.ewalletData.observe(viewLifecycleOwner) {
+            setUpViewWallet()
+        }
+        viewModel.savingDepositData.observe(viewLifecycleOwner) {
+            setUpViewSavingDeposit()
+        }
     }
 
     private fun setUpViewWallet(){
@@ -151,8 +167,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
             )
         )
     }
-    private fun setUpViewMenu(){
-        menuAdapter = MenuHomeAdapter(populateDataMenuHome())
+    private fun setUpViewMenu(data: List<MenuModel>){
+        menuAdapter = MenuHomeAdapter(data)
         binding.componentMenuHome.gridHome.adapter = menuAdapter
 
         menuAdapter.setOnClickMenu {

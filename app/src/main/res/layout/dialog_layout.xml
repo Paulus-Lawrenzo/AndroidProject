@@ -1,44 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/ivIconDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_account_circle_24"
-        />
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        tools:text="Apakah Anda Ingin Keluar?"
-        />
-
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="10dp">
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btnPositive"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivIconDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yes"
-            />
+            android:layout_gravity="center"
+            android:src="@drawable/baseline_account_circle_24" />
 
-        <Button
-            android:id="@+id/btnNegative"
+        <TextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No"
-            android:layout_marginStart="20dp"
-            />
+            android:layout_marginTop="20dp"
+            android:text="Apakah anda ingin keluar ?" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/btnPositive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="yes" />
+
+            <Button
+                android:id="@+id/btnNegative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="No" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

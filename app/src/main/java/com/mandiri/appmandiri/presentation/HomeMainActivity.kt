@@ -37,7 +37,7 @@ class HomeMainActivity : AppCompatActivity() {
 //                }
 
                 R.id.navigationPromo -> {
-                    replaceFragment(ProfileFragment())
+                    replaceFragment(PromoFragment())
                     return@OnNavigationItemSelectedListener true
                 }
 

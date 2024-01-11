@@ -21,7 +21,6 @@
         android:src="@drawable/baseline_account_circle_24" />
 
     <LinearLayout
-        android:background="@drawable/layer_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
