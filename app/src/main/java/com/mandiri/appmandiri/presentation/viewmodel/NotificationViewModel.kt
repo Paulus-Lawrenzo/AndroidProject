@@ -21,7 +21,38 @@ class NotificationViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun populateDataNotification(): List<NotificationModel> {
-        return listOf()
+        return listOf(
+            NotificationModel(
+                date = "3 Januari 2024",
+                title = "Anda mendapatkan uang tunai",
+                subtitle = "Uang tunai yang anda dapatkan sebesar 10.000.000 Rupiah"
+            ),
+            NotificationModel(
+                date = "3 Januari 2024",
+                title = "Anda mendapatkan uang tunai",
+                subtitle = "Uang tunai yang anda dapatkan sebesar 10.000.000 Rupiah"
+            ),
+            NotificationModel(
+                date = "3 Januari 2024",
+                title = "Anda mendapatkan uang tunai",
+                subtitle = "Uang tunai yang anda dapatkan sebesar 10.000.000 Rupiah"
+            ),
+            NotificationModel(
+                date = "3 Januari 2024",
+                title = "Anda mendapatkan uang tunai",
+                subtitle = "Uang tunai yang anda dapatkan sebesar 10.000.000 Rupiah"
+            ),
+            NotificationModel(
+                date = "3 Januari 2024",
+                title = "Anda mendapatkan uang tunai",
+                subtitle = "Uang tunai yang anda dapatkan sebesar 10.000.000 Rupiah"
+            ),
+            NotificationModel(
+                date = "3 Januari 2024",
+                title = "Anda mendapatkan uang tunai",
+                subtitle = "Uang tunai yang anda dapatkan sebesar 10.000.000 Rupiah"
+            ),
+        )
     }
 
     fun updateCustomData() {
